@@ -1,10 +1,12 @@
-package com.kylecorry.oneironaut
+package com.kylecorry.oneironaut.app
 
 import android.app.Application
 import com.kylecorry.andromeda.preferences.PreferenceMigration
 import com.kylecorry.andromeda.preferences.PreferenceMigrator
 import com.kylecorry.oneironaut.app.NotificationChannels
+import dagger.hilt.android.HiltAndroidApp
 
+@HiltAndroidApp
 class MyApplication : Application() {
 
     override fun onCreate() {

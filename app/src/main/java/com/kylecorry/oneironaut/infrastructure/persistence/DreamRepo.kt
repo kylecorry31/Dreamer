@@ -1,12 +1,13 @@
 package com.kylecorry.oneironaut.infrastructure.persistence
 
-import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
-import com.kylecorry.oneironaut.app.AppDatabase
 import com.kylecorry.oneironaut.domain.Dream
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class DreamRepo(private val dao: DreamDao) {
+@Singleton
+class DreamRepo @Inject constructor(private val dao: DreamDao) {
 
     fun getAllLive(): LiveData<List<Dream>> {
         return Transformations.map(dao.getAll()) {
@@ -29,19 +30,5 @@ class DreamRepo(private val dao: DreamDao) {
 
     suspend fun delete(dream: Dream) {
         dao.delete(DreamEntity.fromDream(dream))
-    }
-
-    companion object {
-        // For Singleton instantiation
-        @Volatile
-        private var instance: DreamRepo? = null
-
-        fun getInstance(context: Context): DreamRepo {
-            return instance ?: synchronized(this) {
-                instance ?: DreamRepo(AppDatabase.getInstance(context).dreamDao()).also {
-                    instance = it
-                }
-            }
-        }
     }
 }

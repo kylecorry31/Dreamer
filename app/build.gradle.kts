@@ -3,6 +3,7 @@ plugins {
     kotlin("android")
     kotlin("kapt")
     id("kotlin-parcelize")
+    id("dagger.hilt.android.plugin")
 }
 
 android {
@@ -90,6 +91,9 @@ dependencies {
     implementation("com.github.kylecorry31.andromeda:list:$andromedaVersion")
     implementation("com.github.kylecorry31.andromeda:files:$andromedaVersion")
 
+    // Hilt
+    implementation("com.google.dagger:hilt-android:2.43.2")
+    kapt("com.google.dagger:hilt-android-compiler:2.43.2")
 
     // Testing
     testImplementation("junit:junit:4.13.2")
@@ -100,4 +104,9 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter-params:5.9.0")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.0")
     testImplementation("org.mockito.kotlin:mockito-kotlin:3.2.0")
+}
+
+// Allow references to generated code
+kapt {
+    correctErrorTypes = true
 }
