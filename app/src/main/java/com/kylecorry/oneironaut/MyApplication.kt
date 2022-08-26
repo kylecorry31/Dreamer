@@ -1,8 +1,9 @@
-package com.kylecorry.oneironaut.app
+package com.kylecorry.oneironaut
 
 import android.app.Application
 import com.kylecorry.andromeda.preferences.PreferenceMigration
 import com.kylecorry.andromeda.preferences.PreferenceMigrator
+import com.kylecorry.oneironaut.app.NotificationChannels
 
 class MyApplication : Application() {
 

@@ -5,18 +5,20 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import com.kylecorry.oneironaut.infrastructure.persistence.DreamDao
+import com.kylecorry.oneironaut.infrastructure.persistence.DreamEntity
 
 /**
  * The Room database for this app
  */
 @Database(
-    entities = [],
+    entities = [DreamEntity::class],
     version = 1,
     exportSchema = false
 )
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
-    // Add DAOs here as abstract methods
+    abstract fun dreamDao(): DreamDao
 
     companion object {
         private const val DB_NAME = "oneironaut_db"
@@ -33,7 +35,7 @@ abstract class AppDatabase : RoomDatabase() {
 
         private fun buildDatabase(context: Context): AppDatabase {
             return Room.databaseBuilder(context, AppDatabase::class.java, DB_NAME)
-                .addMigrations()
+//                .addMigrations()
                 .build()
         }
     }

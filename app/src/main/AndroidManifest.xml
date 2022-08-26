@@ -4,7 +4,7 @@
     package="com.kylecorry.oneironaut">
 
     <application
-        android:name="com.kylecorry.oneironaut.app.MyApplication"
+        android:name="com.kylecorry.oneironaut.MyApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
