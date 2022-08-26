@@ -6,4 +6,7 @@
     <string name="email" translatable="false">kylecorry31@gmail.com</string>
     <string name="journal">Journal</string>
     <string name="settings">Settings</string>
+    <string name="no_dreams">No dreams</string>
+    <string name="delete">Delete</string>
+    <string name="delete_dream_prompt">Delete dream?</string>
 </resources>

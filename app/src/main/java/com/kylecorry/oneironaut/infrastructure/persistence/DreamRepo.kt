@@ -3,6 +3,8 @@ package com.kylecorry.oneironaut.infrastructure.persistence
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import com.kylecorry.oneironaut.domain.Dream
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -15,12 +17,12 @@ class DreamRepo @Inject constructor(private val dao: DreamDao) {
         }
     }
 
-    suspend fun get(id: Long): Dream? {
-        return dao.get(id)?.toDream()
+    suspend fun get(id: Long): Dream? = withContext(Dispatchers.IO) {
+        dao.get(id)?.toDream()
     }
 
-    suspend fun add(dream: Dream): Long {
-        return if (dream.id == 0L) {
+    suspend fun add(dream: Dream): Long = withContext(Dispatchers.IO) {
+        if (dream.id == 0L) {
             dao.insert(DreamEntity.fromDream(dream))
         } else {
             dao.update(DreamEntity.fromDream(dream))
@@ -28,7 +30,7 @@ class DreamRepo @Inject constructor(private val dao: DreamDao) {
         }
     }
 
-    suspend fun delete(dream: Dream) {
+    suspend fun delete(dream: Dream) = withContext(Dispatchers.IO) {
         dao.delete(DreamEntity.fromDream(dream))
     }
 }
