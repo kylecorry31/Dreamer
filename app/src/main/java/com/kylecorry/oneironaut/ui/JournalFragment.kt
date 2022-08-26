@@ -8,6 +8,7 @@ import androidx.lifecycle.lifecycleScope
 import com.kylecorry.andromeda.alerts.CoroutineAlerts
 import com.kylecorry.andromeda.alerts.toast
 import com.kylecorry.andromeda.fragments.BoundFragment
+import com.kylecorry.andromeda.pickers.CoroutinePickers
 import com.kylecorry.oneironaut.R
 import com.kylecorry.oneironaut.databinding.FragmentJournalBinding
 import com.kylecorry.oneironaut.domain.Dream
@@ -17,6 +18,7 @@ import com.kylecorry.oneironaut.ui.lists.DreamListItemMapper
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import java.time.Instant
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -35,6 +37,20 @@ class JournalFragment : BoundFragment<FragmentJournalBinding>() {
         repo.getAllLive().observe(viewLifecycleOwner) {
             binding.dreamList.setItems(it.sortedByDescending { it.time }, mapper)
         }
+        binding.addBtn.setOnClickListener {
+            lifecycleScope.launchWhenResumed {
+                val text = withContext(Dispatchers.Main) {
+                    CoroutinePickers.text(
+                        requireContext(),
+                        getString(R.string.dream)
+                    )
+                }
+
+                if (text != null) {
+                    repo.add(Dream(0, Instant.now(), description = text))
+                }
+            }
+        }
     }
 
     override fun generateBinding(
@@ -46,8 +62,18 @@ class JournalFragment : BoundFragment<FragmentJournalBinding>() {
 
     private fun handleDreamAction(dream: Dream, action: DreamAction) {
         when (action) {
-            DreamAction.Edit -> {
-                toast("OPEN")
+            DreamAction.Edit -> lifecycleScope.launchWhenResumed {
+                val text = withContext(Dispatchers.Main) {
+                    CoroutinePickers.text(
+                        requireContext(),
+                        getString(R.string.dream),
+                        default = dream.description
+                    )
+                }
+
+                if (text != null) {
+                    repo.add(dream.copy(description = text))
+                }
             }
             DreamAction.Delete -> lifecycleScope.launchWhenResumed {
                 val delete = withContext(Dispatchers.Main) {

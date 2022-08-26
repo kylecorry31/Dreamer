@@ -9,4 +9,5 @@
     <string name="no_dreams">No dreams</string>
     <string name="delete">Delete</string>
     <string name="delete_dream_prompt">Delete dream?</string>
+    <string name="dream">Dream</string>
 </resources>
