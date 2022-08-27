@@ -1,2 +1,2 @@
 include(":app")
-rootProject.name = "Andromeda App Template"
+rootProject.name = "Oneironaut"
