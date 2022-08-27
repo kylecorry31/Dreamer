@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.kylecorry.andromeda.alerts.CoroutineAlerts
 import com.kylecorry.andromeda.alerts.toast
 import com.kylecorry.andromeda.fragments.BoundFragment
@@ -38,18 +40,9 @@ class JournalFragment : BoundFragment<FragmentJournalBinding>() {
             binding.dreamList.setItems(it.sortedByDescending { it.time }, mapper)
         }
         binding.addBtn.setOnClickListener {
-            lifecycleScope.launchWhenResumed {
-                val text = withContext(Dispatchers.Main) {
-                    CoroutinePickers.text(
-                        requireContext(),
-                        getString(R.string.dream)
-                    )
-                }
-
-                if (text != null) {
-                    repo.add(Dream(0, Instant.now(), description = text))
-                }
-            }
+            findNavController().navigate(
+                R.id.action_journal_to_dream_entry
+            )
         }
     }
 
@@ -63,17 +56,10 @@ class JournalFragment : BoundFragment<FragmentJournalBinding>() {
     private fun handleDreamAction(dream: Dream, action: DreamAction) {
         when (action) {
             DreamAction.Edit -> lifecycleScope.launchWhenResumed {
-                val text = withContext(Dispatchers.Main) {
-                    CoroutinePickers.text(
-                        requireContext(),
-                        getString(R.string.dream),
-                        default = dream.description
-                    )
-                }
-
-                if (text != null) {
-                    repo.add(dream.copy(description = text))
-                }
+                findNavController().navigate(
+                    R.id.action_journal_to_dream_entry,
+                    bundleOf("dream_id" to dream.id)
+                )
             }
             DreamAction.Delete -> lifecycleScope.launchWhenResumed {
                 val delete = withContext(Dispatchers.Main) {

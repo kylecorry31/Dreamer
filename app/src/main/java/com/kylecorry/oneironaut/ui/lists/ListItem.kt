@@ -8,6 +8,7 @@ data class ListItem(
     val id: Long,
     val title: CharSequence,
     val subtitle: CharSequence? = null,
+    val singleLineTitle: Boolean = false,
     val singleLineSubtitle: Boolean = false,
     val icon: ListIcon? = null,
     val checkbox: ListItemCheckbox? = null,

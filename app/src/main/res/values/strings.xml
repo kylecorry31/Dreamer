@@ -10,4 +10,10 @@
     <string name="delete">Delete</string>
     <string name="delete_dream_prompt">Delete dream?</string>
     <string name="dream">Dream</string>
+    <string name="title">Title</string>
+    <string name="description">Description</string>
+    <string name="lucid">Lucid</string>
+    <string name="recurring">Recurring</string>
+    <string name="nightmare">Nightmare</string>
+    <string name="save">Save</string>
 </resources>

@@ -3,8 +3,8 @@ package com.kylecorry.oneironaut.domain
 import java.time.Instant
 
 data class Dream(
-    val id: Long,
-    val time: Instant,
+    val id: Long = 0,
+    val time: Instant = Instant.now(),
     val title: String = "",
     val description: String = "",
     val isLucid: Boolean = false,

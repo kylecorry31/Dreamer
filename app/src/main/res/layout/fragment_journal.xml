@@ -5,6 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <com.kylecorry.oneironaut.ui.ToolTitleView
+        android:id="@+id/dream_title"
+        app:title="Journal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <com.kylecorry.oneironaut.ui.lists.AndromedaListView
         android:id="@+id/dream_list"
         style="@style/AppTheme.ListViewWithFab"
@@ -13,7 +22,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/dream_title" />
 
     <TextView
         android:id="@+id/dreams_empty_text"
