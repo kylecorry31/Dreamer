@@ -31,7 +31,7 @@ class DreamListItemMapper(
                 value.time.toZonedDateTime(),
                 includeWeekDay = false
             ),
-            singleLineTitle = true,
+            titleMaxLines = 3,
             icon = ResourceListIcon(
                 R.drawable.ic_journal,
                 Resources.androidTextColorSecondary(context)
