@@ -1,6 +1,5 @@
 package com.kylecorry.oneironaut.ui
 
-import android.content.Context
 import com.kylecorry.andromeda.alerts.Alerts
 import com.kylecorry.andromeda.core.system.CurrentApp
 import com.kylecorry.andromeda.core.system.Intents
