@@ -1,7 +1,6 @@
 package com.kylecorry.oneironaut.infrastructure.persistence
 
 import android.content.Context
-import com.kylecorry.oneironaut.app.AppDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

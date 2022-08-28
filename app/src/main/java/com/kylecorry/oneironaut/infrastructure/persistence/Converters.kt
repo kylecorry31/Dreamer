@@ -1,4 +1,4 @@
-package com.kylecorry.oneironaut.app
+package com.kylecorry.oneironaut.infrastructure.persistence
 
 import androidx.room.TypeConverter
 import java.time.Instant

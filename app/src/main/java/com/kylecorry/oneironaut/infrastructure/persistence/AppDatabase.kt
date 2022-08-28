@@ -1,12 +1,10 @@
-package com.kylecorry.oneironaut.app
+package com.kylecorry.oneironaut.infrastructure.persistence
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.kylecorry.oneironaut.infrastructure.persistence.DreamDao
-import com.kylecorry.oneironaut.infrastructure.persistence.DreamEntity
 
 /**
  * The Room database for this app
