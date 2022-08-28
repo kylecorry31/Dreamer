@@ -27,10 +27,6 @@ class DreamListItemMapper(
                 }
                 append(value.description)
             },
-            formatter.formatDate(
-                value.time.toZonedDateTime(),
-                includeWeekDay = false
-            ),
             titleMaxLines = 3,
             icon = ResourceListIcon(
                 R.drawable.ic_journal,

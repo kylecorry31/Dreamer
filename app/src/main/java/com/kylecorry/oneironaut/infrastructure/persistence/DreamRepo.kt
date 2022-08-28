@@ -5,14 +5,15 @@ import androidx.lifecycle.Transformations
 import com.kylecorry.oneironaut.domain.Dream
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import java.time.Instant
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 class DreamRepo @Inject constructor(private val dao: DreamDao) {
 
-    fun getAllLive(): LiveData<List<Dream>> {
-        return Transformations.map(dao.getAll()) {
+    fun getLive(start: Instant, end: Instant): LiveData<List<Dream>> {
+        return Transformations.map(dao.getAll(start.toEpochMilli(), end.toEpochMilli())) {
             it.map { it.toDream() }
         }
     }
