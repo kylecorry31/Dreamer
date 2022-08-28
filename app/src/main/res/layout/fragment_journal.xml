@@ -5,56 +5,38 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.kylecorry.oneironaut.ui.ToolTitleView
-        android:id="@+id/dream_title"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:title="Journal" />
-
     <com.kylecorry.oneironaut.ui.DatePickerView
         android:id="@+id/dream_date"
         android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/default_top_margin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/dream_title" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <com.kylecorry.oneironaut.ui.lists.AndromedaListView
-        android:id="@+id/dream_list"
-        style="@style/AppTheme.ListViewWithFab"
+    <com.google.android.material.card.MaterialCardView
+        style="@style/Widget.Material3.CardView.Outlined"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="16dp"
+        android:layout_margin="16dp"
+        android:layout_weight="1"
+        android:backgroundTint="@android:color/transparent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/dream_date" />
+        app:layout_constraintTop_toBottomOf="@id/dream_date">
 
-    <TextView
-        android:id="@+id/dreams_empty_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/no_dreams"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/dream_list"
-        tools:visibility="visible" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/add_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="@dimen/default_bottom_margin"
-        android:src="@drawable/ic_add"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        <com.kylecorry.oneironaut.ui.Notepad
+            android:id="@+id/dream_edit"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="@string/dream"
+            android:imeOptions="actionNone|flagNoPersonalizedLearning"
+            android:lineSpacingMultiplier="1.5"
+            android:padding="16dp"
+            android:scrollbars="vertical" />
+    </com.google.android.material.card.MaterialCardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

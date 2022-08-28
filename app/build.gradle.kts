@@ -90,6 +90,7 @@ dependencies {
     implementation("com.github.kylecorry31.andromeda:pickers:$andromedaVersion")
     implementation("com.github.kylecorry31.andromeda:list:$andromedaVersion")
     implementation("com.github.kylecorry31.andromeda:files:$andromedaVersion")
+    implementation("com.github.kylecorry31.andromeda:canvas:$andromedaVersion")
 
     // Hilt
     implementation("com.google.dagger:hilt-android:2.43.2")

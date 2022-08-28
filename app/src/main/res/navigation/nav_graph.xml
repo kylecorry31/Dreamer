@@ -8,17 +8,9 @@
     <fragment
         android:id="@+id/action_journal"
         android:name="com.kylecorry.oneironaut.ui.JournalFragment"
-        android:label="MainFragment">
-        <action
-            android:id="@+id/action_journal_to_dream_entry"
-            app:destination="@id/action_dream_entry" />
-    </fragment>
+        android:label="MainFragment"/>
     <fragment
         android:id="@+id/action_settings"
         android:name="com.kylecorry.oneironaut.ui.SettingsFragment"
         android:label="SettingsFragment" />
-    <fragment
-        android:id="@+id/action_dream_entry"
-        android:name="com.kylecorry.oneironaut.ui.DreamEntryFragment"
-        android:label="DreamEntryFragment" />
 </navigation>

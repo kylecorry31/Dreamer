@@ -5,13 +5,13 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.kylecorry.oneironaut.domain.Dream
 import java.time.Instant
+import java.time.LocalDate
 
 @Entity(
     tableName = "dreams"
 )
 data class DreamEntity(
-    @ColumnInfo(name = "time") val time: Instant,
-    @ColumnInfo(name = "title") val title: String = "",
+    @ColumnInfo(name = "date") val date: LocalDate,
     @ColumnInfo(name = "description") val description: String = "",
     @ColumnInfo(name = "is_lucid") val isLucid: Boolean = false,
     @ColumnInfo(name = "is_recurring") val isRecurring: Boolean = false,
@@ -24,8 +24,7 @@ data class DreamEntity(
     fun toDream(): Dream {
         return Dream(
             id,
-            time,
-            title,
+            date,
             description,
             isLucid,
             isRecurring,
@@ -36,8 +35,7 @@ data class DreamEntity(
     companion object {
         fun fromDream(dream: Dream): DreamEntity {
             return DreamEntity(
-                dream.time,
-                dream.title,
+                dream.date,
                 dream.description,
                 dream.isLucid,
                 dream.isRecurring,

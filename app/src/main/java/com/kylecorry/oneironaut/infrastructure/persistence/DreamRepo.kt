@@ -1,21 +1,18 @@
 package com.kylecorry.oneironaut.infrastructure.persistence
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.Transformations
 import com.kylecorry.oneironaut.domain.Dream
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import java.time.Instant
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 class DreamRepo @Inject constructor(private val dao: DreamDao) {
 
-    fun getLive(start: Instant, end: Instant): LiveData<List<Dream>> {
-        return Transformations.map(dao.getAll(start.toEpochMilli(), end.toEpochMilli())) {
-            it.map { it.toDream() }
-        }
+    suspend fun get(date: LocalDate): Dream? = withContext(Dispatchers.IO) {
+        dao.get(date.format(DateTimeFormatter.ISO_LOCAL_DATE))?.toDream()
     }
 
     suspend fun get(id: Long): Dream? = withContext(Dispatchers.IO) {
