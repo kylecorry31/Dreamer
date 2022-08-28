@@ -41,6 +41,15 @@ class JournalFragment : BoundFragment<FragmentJournalBinding>() {
         binding.dreamEdit.addTextChangedListener {
             saveDream()
         }
+        binding.chipLucid.setOnCheckedChangeListener { _, _ ->
+            saveDream()
+        }
+        binding.chipRecurring.setOnCheckedChangeListener { _, _ ->
+            saveDream()
+        }
+        binding.chipNightmare.setOnCheckedChangeListener { _, _ ->
+            saveDream()
+        }
     }
 
     override fun generateBinding(
@@ -51,11 +60,23 @@ class JournalFragment : BoundFragment<FragmentJournalBinding>() {
     }
 
     private fun saveDream() {
-        dream = dream.copy(description = binding.dreamEdit.text?.toString() ?: "")
+        val d = dream.copy(
+            description = binding.dreamEdit.text?.toString() ?: "",
+            isLucid = binding.chipLucid.isChecked,
+            isRecurring = binding.chipRecurring.isChecked,
+            isNightmare = binding.chipNightmare.isChecked
+        )
+        if (d.id == 0L && d.description.isBlank()) {
+            return
+        }
         lifecycleScope.launchWhenResumed {
             dream = runner.cancelPreviousThenRun {
-                val id = repo.add(dream)
-                dream.copy(id = id)
+                if (d.description.isBlank()) {
+                    repo.delete(d)
+                    return@cancelPreviousThenRun Dream(0, d.date)
+                }
+                val id = repo.add(d)
+                d.copy(id = id)
             }
         }
     }
@@ -63,8 +84,11 @@ class JournalFragment : BoundFragment<FragmentJournalBinding>() {
     private fun loadDream(date: LocalDate) {
         lifecycleScope.launchWhenResumed {
             dream = repo.get(date) ?: Dream(0, date)
-            withContext(Dispatchers.Main){
+            withContext(Dispatchers.Main) {
                 binding.dreamEdit.setText(dream.description)
+                binding.chipLucid.isChecked = dream.isLucid
+                binding.chipRecurring.isChecked = dream.isRecurring
+                binding.chipNightmare.isChecked = dream.isNightmare
             }
         }
     }
